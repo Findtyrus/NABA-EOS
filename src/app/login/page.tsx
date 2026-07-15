@@ -134,7 +134,7 @@ export default function LoginPage() {
                 setError(null)
                 setMessage(null)
               }}
-              className="text-sm text-accent-foreground hover:underline"
+              className="text-sm text-accent hover:underline"
             >
               {mode === "signin"
                 ? "Don't have an account? Sign up"

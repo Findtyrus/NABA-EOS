@@ -102,7 +102,7 @@ export function VtoWizard({
               onClick={() => setStepIndex(i)}
               className={cn(
                 "block w-full border-b pb-3 text-left text-xs font-semibold tracking-wide text-muted-foreground hover:text-foreground",
-                i === stepIndex && "text-accent-foreground",
+                i === stepIndex && "text-accent",
               )}
             >
               {i + 1} OF {WIZARD_STEPS.length} &middot; {s.label.toUpperCase()}
@@ -198,7 +198,7 @@ function CoreValuesStep({
           </div>
         ))}
       </div>
-      <button onClick={add} className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline">
+      <button onClick={add} className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent hover:underline">
         <Plus className="size-4" /> Add Core Value
       </button>
     </div>
@@ -321,7 +321,7 @@ function MarketingStep({
         </div>
         <button
           onClick={() => update("mkt_uniques", [...vto.mkt_uniques, ""])}
-          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
         >
           <Plus className="size-4" /> Add Unique
         </button>
@@ -415,7 +415,7 @@ function EoyPictureStep({
         </div>
         <button
           onClick={() => update("eoy_measurables", [...vto.eoy_measurables, { metric: "", target: "" }])}
-          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
         >
           <Plus className="size-4" /> Add Measurable
         </button>
@@ -429,7 +429,7 @@ function EoyPictureStep({
         </div>
         <button
           onClick={() => update("eoy_picture", [...vto.eoy_picture, ""])}
-          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
         >
           <Plus className="size-4" /> Add Statement
         </button>
@@ -501,7 +501,7 @@ function NextYearPlanStep({
         </div>
         <button
           onClick={() => update("next_year_goals", [...vto.next_year_goals, ""])}
-          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+          className="mt-2 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
         >
           <Plus className="size-4" /> Add Goal
         </button>
@@ -572,7 +572,7 @@ function RocksStep({
       </div>
       <button
         onClick={() => setRocks((prev) => [...prev, { rock: "", owner_id: null, due_date: null }])}
-        className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+        className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
       >
         <Plus className="size-4" /> Add Rock
       </button>
@@ -642,7 +642,7 @@ function IssuesStep({
       </div>
       <button
         onClick={() => setIssues((prev) => [...prev, { issue: "", raised_by: null }])}
-        className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent-foreground hover:underline"
+        className="mt-3 flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
       >
         <Plus className="size-4" /> Add Issue
       </button>

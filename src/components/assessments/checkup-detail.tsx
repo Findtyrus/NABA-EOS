@@ -49,7 +49,7 @@ export function CheckupDetail({
   return (
     <div className="flex-1 p-6">
       <p className="text-sm">
-        <Link href={`/assessments/${config.slug}`} className="text-accent-foreground hover:underline">
+        <Link href={`/assessments/${config.slug}`} className="text-accent hover:underline">
           {config.label}
         </Link>{" "}
         <span className="text-muted-foreground">&gt;</span> {title}

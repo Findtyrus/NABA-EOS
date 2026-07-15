@@ -10,7 +10,7 @@ export function MeetingsSection({ meetings }: { meetings: Meeting[] }) {
       action={
         <Link
           href="/meetings/new"
-          className="flex items-center gap-1 text-sm font-medium text-accent-foreground hover:underline"
+          className="flex items-center gap-1 text-sm font-medium text-accent hover:underline"
         >
           <CalendarPlus className="size-4" />
           Create Meeting

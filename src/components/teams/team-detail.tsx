@@ -59,7 +59,7 @@ export function TeamDetail({
   return (
     <div className="flex-1 p-6">
       <p className="text-sm">
-        <Link href="/teams" className="text-accent-foreground hover:underline">
+        <Link href="/teams" className="text-accent hover:underline">
           Teams
         </Link>{" "}
         <span className="text-muted-foreground">&gt;</span> {team.name}

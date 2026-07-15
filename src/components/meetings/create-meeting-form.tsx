@@ -295,7 +295,7 @@ export function CreateMeetingForm({
         <div className="flex flex-col items-center gap-1 text-center">
           <CalendarClock className="size-6 text-muted-foreground" />
           <h2 className="text-xl font-bold">{title || "Untitled Meeting"}</h2>
-          <p className="text-sm font-medium text-accent-foreground">{scheduleSummary}</p>
+          <p className="text-sm font-medium text-accent">{scheduleSummary}</p>
         </div>
 
         <h3 className="text-center text-sm font-semibold text-muted-foreground">
@@ -360,7 +360,7 @@ export function CreateMeetingForm({
 
         <button
           onClick={addSection}
-          className="flex w-full items-center justify-center gap-1 py-2 text-sm font-semibold text-accent-foreground hover:underline"
+          className="flex w-full items-center justify-center gap-1 py-2 text-sm font-semibold text-accent hover:underline"
         >
           <Plus className="size-4" />
           Add Section

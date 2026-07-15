@@ -98,7 +98,7 @@ export function InsightsSection<T>({
           <button
             onClick={() => downloadCsv(`${title.toLowerCase()}.csv`, csvHeaders, filtered.map(getCsvRow))}
             disabled={filtered.length === 0}
-            className="flex shrink-0 items-center gap-1 text-sm font-medium text-accent-foreground hover:underline disabled:pointer-events-none disabled:opacity-40"
+            className="flex shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline disabled:pointer-events-none disabled:opacity-40"
           >
             <Download className="size-4" /> Download CSV
           </button>
@@ -232,7 +232,7 @@ export function InsightsSection<T>({
                 <button
                   disabled={currentPage === 1}
                   onClick={() => setPage((p) => p - 1)}
-                  className="text-accent-foreground hover:underline disabled:pointer-events-none disabled:opacity-40"
+                  className="text-accent hover:underline disabled:pointer-events-none disabled:opacity-40"
                 >
                   Previous
                 </button>
@@ -242,7 +242,7 @@ export function InsightsSection<T>({
                 <button
                   disabled={currentPage === totalPages}
                   onClick={() => setPage((p) => p + 1)}
-                  className="text-accent-foreground hover:underline disabled:pointer-events-none disabled:opacity-40"
+                  className="text-accent hover:underline disabled:pointer-events-none disabled:opacity-40"
                 >
                   Next
                 </button>

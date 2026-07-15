@@ -41,7 +41,7 @@ export function ProcessDetail({ process }: { process: ProcessDoc }) {
   return (
     <div className="flex-1 p-6">
       <p className="text-sm">
-        <Link href="/processes" className="text-accent-foreground hover:underline">
+        <Link href="/processes" className="text-accent hover:underline">
           Processes
         </Link>{" "}
         <span className="text-muted-foreground">&gt;</span> {process.process_name}

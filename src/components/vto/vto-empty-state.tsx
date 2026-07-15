@@ -7,7 +7,7 @@ export function VtoEmptyState() {
     <div className="flex flex-1 items-center justify-center p-6">
       <div className="max-w-md rounded-lg border p-8 text-center">
         <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-accent/10">
-          <Target className="size-6 text-accent-foreground" />
+          <Target className="size-6 text-accent" />
         </div>
         <h2 className="text-lg font-bold">Build your Vision/Traction Organizer</h2>
         <p className="mt-2 text-sm text-muted-foreground">
