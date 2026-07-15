@@ -9,6 +9,17 @@ export type SaveVtoInput = Omit<VtoData, "id"> & {
   issues: IssueDraft[]
 }
 
+export async function saveVtoFields(fields: Omit<VtoData, "id">) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (!user) redirect("/login")
+
+  const { error } = await supabase.from("vto").update(fields).eq("id", 1)
+  if (error) throw new Error(error.message)
+}
+
 export async function saveVto(input: SaveVtoInput) {
   const supabase = await createClient()
   const {

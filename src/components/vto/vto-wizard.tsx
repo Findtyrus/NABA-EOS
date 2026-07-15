@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select"
 import { WIZARD_STEPS, type VtoData, type CoreFocusType } from "@/lib/vto-shared"
 import type { MemberOption } from "@/lib/meetings-shared"
-import { saveVto } from "@/lib/actions/vto"
+import { saveVto, saveVtoFields } from "@/lib/actions/vto"
 
 type RockDraftRow = { rock: string; owner_id: string | null; due_date: string | null }
 type IssueDraftRow = { issue: string; raised_by: string | null }
@@ -52,14 +52,17 @@ export function VtoWizard({
   }
 
   function goNext() {
+    const { id, ...fields } = vto
+    void id
     if (isLastStep) {
       startTransition(async () => {
-        const { id, ...fields } = vto
-        void id
         await saveVto({ ...fields, rocks, issues })
       })
       return
     }
+    startTransition(async () => {
+      await saveVtoFields(fields)
+    })
     setStepIndex((i) => Math.min(i + 1, WIZARD_STEPS.length - 1))
   }
 
