@@ -1,26 +1,150 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-info: var(--info);
+  --color-danger: var(--destructive);
+  --color-danger-light: var(--danger-light);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Mississippi State University brand palette (brand.msstate.edu/assets/materials/msstatecolors.pdf) */
+  --background: rgb(255, 255, 255);
+  --foreground: rgb(43, 43, 43);
+  --card: rgb(255, 255, 255);
+  --card-foreground: rgb(43, 43, 43);
+  --popover: rgb(255, 255, 255);
+  --popover-foreground: rgb(43, 43, 43);
+  --primary: rgb(93, 23, 37); /* MSSTATE Maroon #5D1725 (PMS 505) */
+  --primary-foreground: rgb(255, 255, 255);
+  --secondary: rgb(119, 119, 119); /* MSSTATE Dark Grey #777777 */
+  --secondary-foreground: rgb(255, 255, 255);
+  --muted: rgb(245, 245, 246);
+  --muted-foreground: rgb(119, 119, 119); /* MSSTATE Dark Grey */
+  --accent: rgb(0, 163, 173); /* Accent Teal #00A3AD (PMS 7467) */
+  --accent-foreground: rgb(255, 255, 255);
+  --destructive: rgb(196, 40, 71);
+  --danger-light: rgb(249, 233, 236);
+  --success: rgb(1, 128, 94);
+  --success-light: rgb(237, 247, 244);
+  --warning: rgb(255, 184, 28); /* Accent Gold #FFB81C (PMS 1235) */
+  --warning-light: rgb(255, 244, 219);
+  --info: rgb(0, 163, 173); /* Accent Teal */
+  --border: rgb(193, 198, 200); /* MSSTATE Light Grey #C1C6C8 (PMS 428) */
+  --input: rgb(245, 245, 246);
+  --ring: rgb(93, 23, 37);
+  --chart-1: rgb(93, 23, 37);
+  --chart-2: rgb(0, 163, 173);
+  --chart-3: rgb(255, 184, 28);
+  --chart-4: rgb(100, 47, 108);
+  --chart-5: rgb(119, 119, 119);
+  --radius: 0.5rem;
+  --sidebar: rgb(93, 23, 37); /* MSSTATE Maroon */
+  --sidebar-foreground: rgb(255, 255, 255);
+  --sidebar-primary: rgb(255, 184, 28); /* Accent Gold */
+  --sidebar-primary-foreground: rgb(93, 23, 37);
+  --sidebar-accent: rgb(255, 255, 255); /* active item pill */
+  --sidebar-accent-foreground: rgb(93, 23, 37);
+  --sidebar-border: rgba(255, 255, 255, 0.15);
+  --sidebar-ring: rgb(255, 184, 28);
+}
+
+.dark {
+  --background: rgb(26, 20, 22);
+  --foreground: rgb(245, 245, 246);
+  --card: rgb(38, 28, 31);
+  --card-foreground: rgb(245, 245, 246);
+  --popover: rgb(38, 28, 31);
+  --popover-foreground: rgb(245, 245, 246);
+  --primary: rgb(153, 45, 66); /* lightened maroon for dark-bg contrast */
+  --primary-foreground: rgb(255, 255, 255);
+  --secondary: rgb(119, 119, 119);
+  --secondary-foreground: rgb(255, 255, 255);
+  --muted: rgb(48, 38, 41);
+  --muted-foreground: rgb(193, 198, 200);
+  --accent: rgb(0, 163, 173);
+  --accent-foreground: rgb(255, 255, 255);
+  --destructive: rgb(224, 76, 105);
+  --danger-light: rgb(80, 40, 50);
+  --success: rgb(0, 155, 114);
+  --success-light: rgb(20, 60, 50);
+  --warning: rgb(255, 184, 28);
+  --warning-light: rgb(70, 55, 30);
+  --info: rgb(0, 163, 173);
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgb(255, 184, 28);
+  --chart-1: rgb(153, 45, 66);
+  --chart-2: rgb(0, 163, 173);
+  --chart-3: rgb(255, 184, 28);
+  --chart-4: rgb(100, 47, 108);
+  --chart-5: rgb(193, 198, 200);
+  --sidebar: rgb(20, 14, 16);
+  --sidebar-foreground: rgb(245, 245, 246);
+  --sidebar-primary: rgb(255, 184, 28);
+  --sidebar-primary-foreground: rgb(93, 23, 37);
+  --sidebar-accent: rgb(93, 23, 37);
+  --sidebar-accent-foreground: rgb(255, 255, 255);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgb(255, 184, 28);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }
