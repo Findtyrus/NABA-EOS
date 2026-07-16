@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Users2, Plus, Pencil, Crown } from "lucide-react"
+import { Users2, Plus, Pencil, Crown, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { TeamDialog } from "@/components/teams/team-dialog"
 import { EditMemberDialog } from "@/components/teams/edit-member-dialog"
+import { InviteMemberDialog } from "@/components/teams/invite-member-dialog"
 import { getTeamIcon, getTeamColor, type Team, type Roster } from "@/lib/teams-shared"
 import type { MemberOption } from "@/lib/meetings-shared"
 
@@ -51,23 +52,32 @@ export function TeamsView({
   teams,
   roster,
   members,
+  canInvite,
 }: {
   teams: TeamWithCount[]
   roster: Roster[]
   members: MemberOption[]
+  canInvite: boolean
 }) {
   const [tab, setTab] = useState<"teams" | "people">("teams")
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [inviteOpen, setInviteOpen] = useState(false)
   const [editingMember, setEditingMember] = useState<Roster | null>(null)
 
   return (
     <div className="flex-1 p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">People &amp; Teams</h1>
-        {tab === "teams" && (
+        {tab === "teams" ? (
           <Button onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-primary/90">
             <Plus className="size-4" /> Create Team
           </Button>
+        ) : (
+          canInvite && (
+            <Button onClick={() => setInviteOpen(true)} className="bg-primary hover:bg-primary/90">
+              <Mail className="size-4" /> Invite Member
+            </Button>
+          )
         )}
       </div>
 
@@ -163,6 +173,7 @@ export function TeamsView({
         onClose={() => setDialogOpen(false)}
       />
       <EditMemberDialog member={editingMember} onClose={() => setEditingMember(null)} />
+      <InviteMemberDialog open={inviteOpen} teams={teams} onClose={() => setInviteOpen(false)} />
     </div>
   )
 }

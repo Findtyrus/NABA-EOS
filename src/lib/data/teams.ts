@@ -49,3 +49,30 @@ export async function getRoster(): Promise<Roster[]> {
     .order("full_name", { ascending: true })
   return (data ?? []) as Roster[]
 }
+
+export async function canInviteMembers(memberId: string): Promise<boolean> {
+  const supabase = await createClient()
+
+  const { data: member } = await supabase
+    .from("members")
+    .select("is_owner")
+    .eq("id", memberId)
+    .single()
+  if (member?.is_owner) return true
+
+  const { data: leadershipTeam } = await supabase
+    .from("teams")
+    .select("id")
+    .ilike("name", "Leadership Team")
+    .maybeSingle()
+  if (!leadershipTeam) return false
+
+  const { data: membership } = await supabase
+    .from("team_members")
+    .select("team_id")
+    .eq("team_id", leadershipTeam.id)
+    .eq("member_id", memberId)
+    .maybeSingle()
+
+  return !!membership
+}
