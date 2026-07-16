@@ -52,11 +52,11 @@ export function InviteMemberDialog({
     if (!email.trim()) return
     setError(null)
     startTransition(async () => {
-      try {
-        await sendInvite(email.trim(), teamId === "none" ? null : teamId)
+      const result = await sendInvite(email.trim(), teamId === "none" ? null : teamId)
+      if (result.error) {
+        setError(result.error)
+      } else {
         setSent(true)
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Failed to send invite")
       }
     })
   }

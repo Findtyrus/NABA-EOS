@@ -5,7 +5,11 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { sendInviteEmail } from "@/lib/resend"
 
-async function requireInviter() {
+type InviterResult =
+  | { ok: true; supabase: Awaited<ReturnType<typeof createClient>>; member: { id: string; full_name: string } }
+  | { ok: false; error: string }
+
+async function getInviter(): Promise<InviterResult> {
   const supabase = await createClient()
   const {
     data: { user },
@@ -17,7 +21,7 @@ async function requireInviter() {
     .select("id, full_name, is_owner")
     .eq("id", user.id)
     .single()
-  if (!member) throw new Error("Member profile not found")
+  if (!member) return { ok: false, error: "Member profile not found" }
 
   if (!member.is_owner) {
     const { data: leadershipTeam } = await supabase
@@ -36,15 +40,20 @@ async function requireInviter() {
       : null
 
     if (!membership?.data) {
-      throw new Error("Only the chapter owner or Leadership Team members can invite people")
+      return { ok: false, error: "Only the chapter owner or Leadership Team members can invite people" }
     }
   }
 
-  return { supabase, member }
+  return { ok: true, supabase, member }
 }
 
-export async function sendInvite(email: string, teamId: string | null) {
-  const { supabase, member } = await requireInviter()
+export async function sendInvite(
+  email: string,
+  teamId: string | null,
+): Promise<{ error?: string }> {
+  const inviter = await getInviter()
+  if (!inviter.ok) return { error: inviter.error }
+  const { supabase, member } = inviter
 
   let teamName: string | null = null
   if (teamId) {
@@ -58,17 +67,22 @@ export async function sendInvite(email: string, teamId: string | null) {
     .select("token")
     .single()
 
-  if (error || !invite) throw new Error(error?.message ?? "Failed to create invite")
+  if (error || !invite) return { error: error?.message ?? "Failed to create invite" }
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
   const inviteUrl = `${baseUrl}/invite/${invite.token}`
 
-  await sendInviteEmail({
-    to: email,
-    inviterName: member.full_name,
-    teamName,
-    inviteUrl,
-  })
+  try {
+    await sendInviteEmail({
+      to: email,
+      inviterName: member.full_name,
+      teamName,
+      inviteUrl,
+    })
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Failed to send invite email" }
+  }
 
   revalidatePath("/teams")
+  return {}
 }
